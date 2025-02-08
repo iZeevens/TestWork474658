@@ -22,25 +22,21 @@
    git clone https://github.com/iZeevens/TestWork474658
    cd weather-app
    ```
-2. Перейдите в папку
-    ```sh
-    cd weather-app
-    ```
-3. Установите зависимости:
+2. Установите зависимости:
    ```sh
    npm install
    # или
    yarn install
    ```
-4. Создайте файл `.env` и добавьте API-ключ:
+3. Создайте файл `.env` и добавьте API-ключ:
    ```sh
    NEXT_PUBLIC_WEATHER_API_KEY=your_api_key
    ```
-5. Запустите проект в режиме разработки:
+4. Запустите проект в режиме разработки:
    ```sh
    npm run dev
    # или
    yarn dev
    ```
-6. Откройте в браузере: [http://localhost:3000](http://localhost:3000)
+5. Откройте в браузере: [http://localhost:3000](http://localhost:3000)
 
