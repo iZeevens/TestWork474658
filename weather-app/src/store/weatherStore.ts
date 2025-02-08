@@ -1,13 +1,13 @@
 import { create } from "zustand";
-import { WeatherData } from "@/types/types";
+import { ResponseCurrentWeather, ResponseWeatherForecast } from "@/types/types";
 
 interface WeatherState {
-  currentWeather: WeatherData | null;
-  forecast: WeatherData[];
+  currentWeather: ResponseCurrentWeather | null;
+  forecast: ResponseWeatherForecast[];
   loading: boolean;
   error: string | null;
-  setCurrentWeather: (weather: WeatherData | null) => void;
-  setForecast: (forecast: WeatherData[]) => void;
+  setCurrentWeather: (weather: ResponseCurrentWeather | null) => void;
+  setForecast: (forecast: ResponseWeatherForecast[]) => void;
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
 }
