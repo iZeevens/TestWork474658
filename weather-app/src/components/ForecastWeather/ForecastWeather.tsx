@@ -36,15 +36,16 @@ function ForecastWeather() {
         <div className="row justify-content-center mt-5 gap-3">
           <h2>{forecast.city.name}</h2>
           {dailyForecast.map((item) => (
-            <WeatherCard
-              key={item.dt}
-              city={forecast.city.name}
-              temperature={item.main.temp}
-              description={item.weather[0].description}
-              icon={item.weather[0].icon}
-              humidity={item.main.humidity}
-              windSpeed={item.wind.speed}
-            />
+            <div key={item.dt} className="col-12 col-sm-8 col-lg-4 col-xl-2 p-0">
+              <WeatherCard
+                city={forecast.city.name}
+                temperature={item.main.temp}
+                description={item.weather[0].description}
+                icon={item.weather[0].icon}
+                humidity={item.main.humidity}
+                windSpeed={item.wind.speed}
+              />
+            </div>
           ))}
         </div>
       ) : (
