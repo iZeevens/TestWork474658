@@ -1,31 +1,35 @@
 "use client";
 import { useState, useEffect } from "react";
 import { ResponseCurrentWeather } from "@/types/types";
-import WeatherCard from "../WeatherCard/WeatherCard";
+import { fetchWithErrorHandling } from "../../../utils/utils";
 import { useFavoritesStore } from "@/store/favoritesStore";
 import { getWeathersForCites } from "@/api/weather";
+import WeatherCard from "../WeatherCard/WeatherCard";
 
 function FavoritesWeather() {
   const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
   const [favoritesResult, setFavoritesResult] = useState<
-    ResponseCurrentWeather[]
-  >([]);
+    ResponseCurrentWeather[] | null
+  >(null);
 
   useEffect(() => {
-    const fetchFavorites = async () => {
-      const data = await getWeathersForCites(favorites);
+    if (favorites.length === 0) return;
 
-      if (data) setFavoritesResult(data as ResponseCurrentWeather[]);
-    };
-
-    if (favorites.length > 0) {
-      fetchFavorites();
-    }
+    fetchWithErrorHandling<ResponseCurrentWeather[]>(
+      () => getWeathersForCites(favorites),
+      setFavoritesResult,
+      setError,
+      setLoading
+    );
   }, [favorites]);
 
   return (
     <div className="flex flex-wrap justify-center">
-      {favoritesResult.length > 0 ? (
+      {loading && <div className="text-center">Загрузка...</div>}
+      {error && <div className="alert alert-danger">{error}</div>}
+      {favoritesResult && favoritesResult.length > 0 ? (
         favoritesResult.map((weather) => {
           const isFavorite = favorites.includes(weather.name);
 

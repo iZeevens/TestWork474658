@@ -1,36 +1,21 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { ResponseCurrentWeather, ResponseWeatherForecast } from "@/types/types";
 
 interface IWeatherState {
-  currentWeather: ResponseCurrentWeather | null;
-  forecast: ResponseWeatherForecast | null;
-  loading: boolean;
-  error: string | null;
-  setCurrentWeather: (weather: ResponseCurrentWeather | null) => void;
-  setForecast: (forecast: ResponseWeatherForecast | null) => void;
-  setLoading: (loading: boolean) => void;
-  setError: (error: string | null) => void;
+  cityInput: string;
+  addInput: (city: string) => void;
 }
 
 export const useWeatherStore = create<IWeatherState>()(
   persist(
     (set) => ({
-      currentWeather: null,
-      forecast: null,
-      loading: false,
-      error: null,
-      setCurrentWeather: (weather) => set({ currentWeather: weather }),
-      setForecast: (forecast) => set({ forecast }),
-      setLoading: (loading) => set({ loading }),
-      setError: (error) => set({ error }),
+      cityInput: "",
+      addInput(city) {
+        return set({ cityInput: city });
+      },
     }),
     {
       name: "weather-storage",
-      partialize: (state) => ({
-        currentWeather: state.currentWeather,
-        forecast: state.forecast,
-      }),
     }
   )
 );
