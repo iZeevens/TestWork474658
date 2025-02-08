@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { ResponseCurrentWeather, ResponseWeatherForecast } from "@/types/types";
 
-interface WeatherState {
+interface IWeatherState {
   currentWeather: ResponseCurrentWeather | null;
   forecast: ResponseWeatherForecast | null;
   loading: boolean;
@@ -13,7 +13,7 @@ interface WeatherState {
   setError: (error: string | null) => void;
 }
 
-export const useWeatherStore = create<WeatherState>()(
+export const useWeatherStore = create<IWeatherState>()(
   persist(
     (set) => ({
       currentWeather: null,
