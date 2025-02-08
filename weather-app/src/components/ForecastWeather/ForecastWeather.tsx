@@ -49,7 +49,7 @@ function ForecastWeather() {
           ))}
         </div>
       ) : (
-        ""
+        !loading && !error && <span>Сначала выберите город</span>
       )}
     </>
   );
