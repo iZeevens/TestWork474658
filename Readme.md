@@ -19,7 +19,7 @@
 ## Установка и запуск
 1. Клонируйте репозиторий:
    ```sh
-   git clone https://github.com/your-username/weather-app.git
+   git clone https://github.com/iZeevens/TestWork474658
    cd weather-app
    ```
 2. Перейдите в папку
