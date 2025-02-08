@@ -1,3 +1,5 @@
+import { AxiosError } from "axios";
+
 const fetchWithErrorHandling = async <T>(
   fetchFn: () => Promise<T>,
   setData: (data: T | null) => void,
@@ -11,7 +13,13 @@ const fetchWithErrorHandling = async <T>(
     const data = await fetchFn();
     setData(data);
   } catch (err) {
-    setError("Ошибка загрузки данных. Попробуйте позже.");
+    if (err instanceof AxiosError)  {
+      if (err.response?.data?.message) {
+        setError(err.response.data.message);
+      } else {
+        setError("Ошибка загрузки данных. Попробуйте позже.");
+      }
+    }
     console.error("Fetch error:", err);
   } finally {
     if (setLoading) setLoading(false);

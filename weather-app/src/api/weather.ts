@@ -17,7 +17,7 @@ const fetchWeatherData = async (endpoint: string, params: object) => {
     return response.data;
   } catch (error) {
     console.error(`Ошибка при получении ${endpoint}:`, error);
-    return null;
+    throw error
   }
 };
 
