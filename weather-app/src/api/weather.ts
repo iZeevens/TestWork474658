@@ -36,4 +36,12 @@ const getWeatherAndForecastData = async (cityName: string) => {
   return { weather, forecast };
 };
 
-export { getWeatherData, getForecastData, getWeatherAndForecastData };
+const getWeathersForCites = async (cities: string[]) => {
+  const weathers = await Promise.all(
+    cities.map((city) => getWeatherData(city))
+  );
+
+  return weathers;
+};
+
+export { getWeatherData, getForecastData, getWeatherAndForecastData, getWeathersForCites };

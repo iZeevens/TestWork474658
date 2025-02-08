@@ -1,23 +1,43 @@
 "use client";
 import { useState } from "react";
+import { ResponseCurrentWeather, ResponseWeatherForecast } from "@/types/types";
+import { getWeatherAndForecastData } from "@/api/weather";
 
 interface ISearchCityProps {
-  onSearch: (city: string) => void;
+  setCurrentWeather: (weather: ResponseCurrentWeather) => void;
+  setForecast: (forecast: ResponseWeatherForecast) => void;
+  setLoading: (loading: boolean) => void;
+  setError: (error: string | null) => void;
 }
 
-function SearchCity({ onSearch }: ISearchCityProps) {
+function SearchCity({ setCurrentWeather, setForecast, setLoading, setError }: ISearchCityProps) {
   const [cityInput, setCityInput] = useState<string>("");
 
-  const handleSumbit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!cityInput) return
 
-    if (cityInput.trim()) {
-      onSearch(cityInput);
+    try { 
+      setLoading(true);
+      setError(null);
+      
+      const weather = await getWeatherAndForecastData(cityInput);
+
+      if (weather) {
+        setCurrentWeather(weather.weather);
+        setForecast(weather.forecast);
+        console.log(weather)
+      }
+    } catch (err) {
+      setError("Ошибка при загрузке данных");
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSumbit}>
+    <form onSubmit={handleSubmit}>
       <div className="input-group">
         <input
           type="text"

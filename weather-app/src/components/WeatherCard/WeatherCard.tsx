@@ -1,6 +1,7 @@
+import styles from "./WeatherCard.module.scss";
 import Image from "next/image";
 
-interface ICurrentWeatherCardProps {
+interface IWeatherCardProps {
   city: string;
   temperature: number;
   description: string;
@@ -9,16 +10,16 @@ interface ICurrentWeatherCardProps {
   windSpeed: number;
 }
 
-function CurrentWeatherCard({
+function WeatherCard({
   city,
   temperature,
   description,
   icon,
   humidity,
   windSpeed,
-}: ICurrentWeatherCardProps) {
+}: IWeatherCardProps) {
   return (
-    <div className="card mt-5">
+    <div className={`card mt-5 ${styles.weatherCard}`}>
       <div className="card-body text-center">
         <h5 className="card-title">{city}</h5>
         <Image
@@ -34,8 +35,15 @@ function CurrentWeatherCard({
           <p>🌬️ Ветер: {windSpeed} м/с</p>
         </div>
       </div>
+      <Image
+        src="/icons/favorites-off.svg"
+        className={styles.favsImg}
+        alt="favorite"
+        height={40}
+        width={40}
+      />
     </div>
   );
 }
 
-export default CurrentWeatherCard;
+export default WeatherCard;

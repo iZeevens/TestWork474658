@@ -1,8 +1,7 @@
 "use client"
 import { useWeatherStore } from "@/store/weatherStore";
 import SearchCity from "../SearchCity/SearchCity";
-import CurrentWeatherCard from "../CurrentWeatherCard/CurrentWeatherCard";
-import { getWeatherAndForecastData } from "@/api/weather";
+import CurrentWeatherCard from "../WeatherCard/WeatherCard";
 
 function CurrentWeather() {
   const {
@@ -15,32 +14,13 @@ function CurrentWeather() {
     error,
   } = useWeatherStore();
 
-  const handleSearch = async (city: string) => {
-    if (!city) return
-
-    try { 
-      setLoading(true);
-      setError(null);
-      
-      const weather = await getWeatherAndForecastData(city);
-
-      if (weather) {
-        setCurrentWeather(weather.weather);
-        setForecast(weather.forecast);
-        console.log(weather)
-      }
-    } catch (err) {
-      setError("Ошибка при загрузке данных");
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <>
       <SearchCity
-        onSearch={handleSearch}
+        setCurrentWeather={setCurrentWeather}
+        setForecast={setForecast}
+        setLoading={setLoading}
+        setError={setError}
       />
       {loading && <div className="text-center">Загрузка...</div>}
       {error && <div className="alert alert-danger">{error}</div>}
