@@ -1,8 +1,11 @@
+import FavoritesWeather from "@/components/FavoritesWeather/FavoritesWeather";
+
 function Favorites() {
   return (
-    <div>
+    <>
       <h1>Избранное</h1>
-    </div>
+      <FavoritesWeather />
+    </>
   );
 }
 

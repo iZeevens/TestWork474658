@@ -15,7 +15,9 @@ function CurrentWeather() {
     error,
   } = useWeatherStore();
   const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
-  const isFavorite = currentWeather ? favorites.includes(currentWeather.name) : false;
+  const isFavorite = currentWeather
+    ? favorites.includes(currentWeather.name)
+    : false;
 
   return (
     <>
@@ -36,7 +38,11 @@ function CurrentWeather() {
           humidity={currentWeather.main.humidity}
           windSpeed={currentWeather.wind.speed}
           favorite={isFavorite}
-          handleFavorite={isFavorite ? removeFavorite : addFavorite}
+          handleFavorite={
+            isFavorite
+              ? () => removeFavorite(currentWeather.name)
+              : () => addFavorite(currentWeather.name)
+          }
         />
       )}
     </>

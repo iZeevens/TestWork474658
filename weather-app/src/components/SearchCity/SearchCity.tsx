@@ -26,7 +26,6 @@ function SearchCity({ setCurrentWeather, setForecast, setLoading, setError }: IS
       if (weather) {
         setCurrentWeather(weather.weather);
         setForecast(weather.forecast);
-        console.log(weather)
       }
     } catch (err) {
       setError("Ошибка при загрузке данных");

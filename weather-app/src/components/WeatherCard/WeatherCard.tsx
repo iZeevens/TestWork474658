@@ -9,7 +9,7 @@ interface IWeatherCardProps {
   humidity: number;
   windSpeed: number;
   favorite?: boolean;
-  handleFavorite?: (city: string) => void;
+  handleFavorite?: () => void;
 }
 
 function WeatherCard({
@@ -22,12 +22,6 @@ function WeatherCard({
   favorite,
   handleFavorite,
 }: IWeatherCardProps) {
-
-  const handleFavoriteClick = () => {
-    if (handleFavorite) {
-      handleFavorite(city);
-    }
-  }
 
   return (
     <div className={`card mt-5 ${styles.weatherCard}`}>
@@ -53,7 +47,7 @@ function WeatherCard({
           alt="favorite"
           height={40}
           width={40}
-          onClick={handleFavoriteClick}
+          onClick={handleFavorite}
         />
       )}
     </div>
