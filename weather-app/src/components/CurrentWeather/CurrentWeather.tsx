@@ -1,5 +1,6 @@
-"use client"
+"use client";
 import { useWeatherStore } from "@/store/weatherStore";
+import { useFavoritesStore } from "@/store/favoritesStore";
 import SearchCity from "../SearchCity/SearchCity";
 import CurrentWeatherCard from "../WeatherCard/WeatherCard";
 
@@ -13,6 +14,8 @@ function CurrentWeather() {
     loading,
     error,
   } = useWeatherStore();
+  const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
+  const isFavorite = currentWeather ? favorites.includes(currentWeather.name) : false;
 
   return (
     <>
@@ -32,6 +35,8 @@ function CurrentWeather() {
           icon={currentWeather.weather[0].icon}
           humidity={currentWeather.main.humidity}
           windSpeed={currentWeather.wind.speed}
+          favorite={isFavorite}
+          handleFavorite={isFavorite ? removeFavorite : addFavorite}
         />
       )}
     </>

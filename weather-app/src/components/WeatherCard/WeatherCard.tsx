@@ -8,6 +8,8 @@ interface IWeatherCardProps {
   icon: string;
   humidity: number;
   windSpeed: number;
+  favorite?: boolean;
+  handleFavorite?: (city: string) => void;
 }
 
 function WeatherCard({
@@ -17,7 +19,16 @@ function WeatherCard({
   icon,
   humidity,
   windSpeed,
+  favorite,
+  handleFavorite,
 }: IWeatherCardProps) {
+
+  const handleFavoriteClick = () => {
+    if (handleFavorite) {
+      handleFavorite(city);
+    }
+  }
+
   return (
     <div className={`card mt-5 ${styles.weatherCard}`}>
       <div className="card-body text-center">
@@ -35,13 +46,16 @@ function WeatherCard({
           <p>🌬️ Ветер: {windSpeed} м/с</p>
         </div>
       </div>
-      <Image
-        src="/icons/favorites-off.svg"
-        className={styles.favsImg}
-        alt="favorite"
-        height={40}
-        width={40}
-      />
+      {favorite !== undefined && (
+        <Image
+          src={`/icons/favorites-${favorite ? "on" : "off"}.svg`}
+          className={styles.favsImg}
+          alt="favorite"
+          height={40}
+          width={40}
+          onClick={handleFavoriteClick}
+        />
+      )}
     </div>
   );
 }
