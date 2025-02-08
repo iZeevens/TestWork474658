@@ -16,7 +16,7 @@ function SearchCity({ addInput }: ISearchCityProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="mb-5">
       <div className="input-group">
         <input
           type="text"

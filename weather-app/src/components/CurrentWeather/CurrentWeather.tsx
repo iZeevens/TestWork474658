@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useWeatherStore } from "@/store/weatherStore";
+import { useCityStore } from "@/store/cityStore";
 import { useFavoritesStore } from "@/store/favoritesStore";
 import { ResponseCurrentWeather } from "@/types/types";
 import { getWeatherData } from "@/api/weather";
@@ -10,7 +10,7 @@ import CurrentWeatherCard from "../WeatherCard/WeatherCard";
 
 function CurrentWeather() {
   const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
-  const { cityInput, addInput } = useWeatherStore();
+  const { cityInput, addInput } = useCityStore();
   const [weather, setWeather] = useState<ResponseCurrentWeather | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -31,6 +31,7 @@ function CurrentWeather() {
   return (
     <>
       <SearchCity addInput={addInput} />
+
       {loading && <div className="text-center">Загрузка...</div>}
       {error && <div className="alert alert-danger">{error}</div>}
       {weather && (

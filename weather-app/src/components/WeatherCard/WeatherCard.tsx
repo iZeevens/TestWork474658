@@ -2,13 +2,14 @@ import styles from "./WeatherCard.module.scss";
 import Image from "next/image";
 
 interface IWeatherCardProps {
-  city: string;
+  city?: string;
   temperature: number;
   description: string;
   icon: string;
   humidity: number;
   windSpeed: number;
   favorite?: boolean;
+  dayOfWeek?: string;
   handleFavorite?: () => void;
 }
 
@@ -20,13 +21,15 @@ function WeatherCard({
   humidity,
   windSpeed,
   favorite,
+  dayOfWeek,
   handleFavorite,
 }: IWeatherCardProps) {
 
   return (
-    <div className={`card mt-5 ${styles.weatherCard}`}>
+    <div className={`card ${styles.weatherCard}`}>
       <div className="card-body text-center">
-        <h5 className="card-title">{city}</h5>
+        {city && <h5 className="card-title">{city}</h5>}
+        {dayOfWeek && <h6>{dayOfWeek}</h6>}
         <Image
           src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
           alt={description}

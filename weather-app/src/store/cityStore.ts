@@ -1,12 +1,12 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-interface IWeatherState {
+interface IСityState {
   cityInput: string;
   addInput: (city: string) => void;
 }
 
-export const useWeatherStore = create<IWeatherState>()(
+export const useCityStore = create<IСityState>()(
   persist(
     (set) => ({
       cityInput: "",
